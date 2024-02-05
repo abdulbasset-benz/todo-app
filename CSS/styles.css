@@ -30,9 +30,6 @@ body {
     padding: 10px;
     border-bottom: 1px solid #ccc;
 }
-ion-icon {
-    --ionicon-stroke-width: 32px;
-}
 .list {
     display: flex;
     align-items: top;
@@ -40,15 +37,28 @@ ion-icon {
     padding-left: 10px;
     padding-top: 10px;
 }
-.list ul li{
+.list ul {
     list-style: none;
-    padding-bottom: 10px;
-
+    padding: 0;
 }
+
+.list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; 
+}
+
 .list a {
     text-decoration: none;
-    color: black;
+    color: #333;
+    display: flex;
+    align-items: center;
 }
+
+.list ion-icon {
+    margin-right: 8px; 
+}
+
 .counter {
     display: flex;
     justify-content: space-between;
