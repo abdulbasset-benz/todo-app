@@ -16,21 +16,35 @@
             
             <div class="list">
                 <ul>
-                    <div class="counter">
-                    <li><a href="#">Tasks</a></li> <span>1</span>
-                    </div>
-                    <li><a href="#">Upcoming</a></li>
-                    <li><a href="#">Projects</a></li>
+                    <li>
+                        <a href="#">
+                        <ion-icon name="create-outline"></ion-icon>
+                        <span>Tasks</span>
+                        </a>
+                    </li> 
+                    <li>
+                        <a href="#">
+                        <ion-icon name="layers-outline"></ion-icon>
+                        <span>Upcoming</span>
+                        </a>
+                    </li> 
+                    <li>
+                        <a href="#">
+                        <ion-icon name="folder-outline"></ion-icon>
+                        <span>Project</span>
+                        <ion-icon name="add-outline"></ion-icon>
+                        </a>
+                    </li> 
                 </ul>
             </div>
             <div class="footer">
                 <div class="setting">
                     <ion-icon name="settings-outline" size = "medium"></ion-icon>
-                    <h5>Settings</h5>
+                    <a href="">Settings</a>
                 </div>
                 <div class="logout">
                     <ion-icon name="log-out-outline" size = "medium"></ion-icon>
-                    <h5>logout</h5> 
+                    <a href="">Logout</a> 
                 </div>
             </div>
         </div> 
