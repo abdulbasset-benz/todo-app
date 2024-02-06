@@ -10,7 +10,7 @@
     <div class="wrapper">
         <div class="sidebar">
             <div class="header">
-                <ion-icon name="image-outline" size = "large"></ion-icon> 
+                <img src="../assets/pic2.jpeg" alt="">
                 <h4>Welcome User!</h4> 
             </div>
             
@@ -54,7 +54,16 @@
         </div> 
     </div>
     <div class="main">
-
+        <div class="search-bar">
+            <form class="form" action="" method="post">
+                <ion-icon name="add-circle" size = "large"></ion-icon>
+                <input id="search" type="search" name="" placeholder="add task">
+                <button>
+                <ion-icon name="add" class="icon"></ion-icon>
+    
+                ADD</button>
+            </form>
+        </div>
     </div>
     
 
