@@ -39,12 +39,16 @@
             </div>
             <div class="footer">
                 <div class="setting">
-                    <ion-icon name="settings-outline" size = "medium"></ion-icon>
-                    <a href="">Settings</a>
+                    <a class="bot-section" href="">
+                        <ion-icon name="settings-outline" size = "medium"></ion-icon>
+                        <span>Settings</span>
+                    </a>
                 </div>
                 <div class="logout">
-                    <ion-icon name="log-out-outline" size = "medium"></ion-icon>
-                    <a href="">Logout</a> 
+                    <a class="bot-section" href="">
+                        <ion-icon name="log-out-outline" size = "medium"></ion-icon>
+                        <span>Logout</span>
+                    </a>
                 </div>
             </div>
         </div> 
