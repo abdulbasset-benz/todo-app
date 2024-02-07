@@ -13,7 +13,6 @@
             <span class="span">Organizing</span>
             <p >Your</p>
             <p id="para">Day-To-Day </p><span class="span"> Tasks</span>
-
             <div >
                 <form  class="form">
                     <input type="text" name="fullname" id="" placeholder="Enter your Fullname">

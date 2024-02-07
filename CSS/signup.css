@@ -23,7 +23,6 @@ body {
 }
 .left, .right {
     flex: 1;
-
 }
 .right {
     width: 100%;
@@ -31,7 +30,7 @@ body {
     border-radius: 15px;
     margin-left: 10px;
     padding: 20px;
-    background-color: rgb(255, 255, 251);
+    background-color: rgb(255, 255, 255);
 }
 .right p {
     font-size: 35px;
@@ -63,11 +62,12 @@ input[type="password"] {
     padding: 8px 20px;
     width: 25%;
     background-color: #E73CF7;
-    border-radius: 15px;
+    border-radius: 5px;
     border: none;
     color: white;
     text-transform: uppercase;
     font-weight: medium;
+    cursor: pointer;
 }
 .left {
     display: flex;
