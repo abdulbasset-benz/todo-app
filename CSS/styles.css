@@ -132,6 +132,7 @@ body {
     background-color: #E73CF7;
     color: aliceblue;
     text-transform: capitalize;
+    cursor: pointer;
 }
 .form button ion-icon {
     color: #ffffff;

@@ -58,7 +58,7 @@
             <form class="form" action="" method="post">
                 <ion-icon name="add-circle" size = "large"></ion-icon>
                 <input id="search" type="search" name="" placeholder="add task">
-                <button>
+                <button type="submit">
                 <ion-icon name="add" class="icon"></ion-icon>
     
                 ADD</button>
