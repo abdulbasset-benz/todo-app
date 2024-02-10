@@ -19,7 +19,7 @@
                     <input type="email" name="email" id="" placeholder="Enter your Email">
                     <input type="password" name="password" id="" placeholder="Password">
                     <input type="password" name="password" id="" placeholder="Reapeat da Password">
-                    <button type="submit">Sign Up</button>
+                    <button type="submit" name="submit">Sign Up</button>
                 </form>
             </div>
         </div>
