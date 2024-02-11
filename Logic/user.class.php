@@ -2,44 +2,45 @@
 
 require_once('dbcon.php');
 
-class signup {
+class Signup {
+
     private $username;
     private $email;
     private $password;
 
-    public function __construct($username, $email, $password)
-    {
+    public function __construct($username, $email, $password) {
+        // Validate and sanitize user input (not shown for brevity)
         $this->username = $username;
         $this->email = $email;
         $this->password = $password;
     }
 
-    public function registerUser($username, $email, $password){
-        global $conn;
-        if((empty($this->username)) ||(empty($this->email)) || (empty($this->password))) {
-            $salt = bin2hex(random_bytes(32));
-            $hashed_password = hash('sha256', $this->password . $salt);
+    public function registerUser($conn) {
+        // Sanitize and validate input again (optional)
+        try {
+            // Generate a random salt
+            $salt = random_bytes(32);
 
-            $sql1 = "INSERT INTO users (Username, Email) VALUES (:username , :email);";
-            $sql2 = "INSERT INTO login (PasswordHash) VALUES (:password , :hash);";
+            // Hash password securely
+            $hashed_password = password_hash($this->password . $salt, PASSWORD_BCRYPT);
 
-            $stmt1 = $conn->prepare($sql1);
-            $stmt1->bindParam(':username',$this->username);
-            $stmt1->bindParam(':email',$this->email);
+            // Use prepared statements with parameter binding
+            $stmt1 = $conn->prepare("INSERT INTO users (Username, Email) VALUES (?, ?)");
+            $stmt1->execute([$this->username, $this->email]);
 
-            $stmt2 = $conn->prepare($sql2);
-            $stmt2->bindParam(':password', $hashed_password);
-            $stmt2->bindParam(':salt', $salt);
+            $stmt2 = $conn->prepare("INSERT INTO login (PasswordHash, Salt) VALUES (?, ?)");
+            $stmt2->execute([$hashed_password, $salt]);
 
-            $stmt1->execute();
-            $stmt2->execute();
-
-            if($stmt1->rowCount() > 0 && $stmt2->rowCount() > 0){
-                return "registration successful";
+            if ($stmt1->rowCount() > 0 && $stmt2->rowCount() > 0) {
+                return "Registration successful";
             } else {
-                return "registration Failed";
+                // Handle unsuccessful registration gracefully
+                // (log error, provide clear message to user)
+                return "Registration failed.";
             }
+        } catch (PDOException $e) {
+            // Log error and handle gracefully
+            throw new Exception("Error registering user: " . $e->getMessage());
         }
     }
-
 }
