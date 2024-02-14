@@ -15,18 +15,38 @@
             $this->password_repeat = $password_repeat;
         }
 
-        function validateName($fullname){
-            if(empty($name)){
-                return "name is required!";
+            function validateName($fullname){
+                if(empty($fullname)){
+                    return "name is required!";
+                }
+                return "";
             }
-            return "";
-        }
 
-        function validateEmail($email){
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
-                return "valid email is required!";
+            function validateEmail($email){
+                if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+                    $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+                    return $sanitizedEmail;
+                }else{
+                    return "Email must be valid!";
+                }
             }
-            return "";
+
+            function validatePassword ($password, $password_repeat){
+                $errors = [];
+                if(strlen($password) > 8){
+                    $errors[] = "Password must be at least 8 characters long";
+                }
+
+                if (!preg_match("/^(?=.*[a-z])(?=.*[0-9]).+$/i", $password)) {
+                    $errors[] = "Password must contain at least one letter and one number";
+                }
+                
+                if($password !== $password_repeat){
+                    $errors[] = "Passwords must match";
+                }
+                return $errors;
         }
+        
+
     }
 ?>
