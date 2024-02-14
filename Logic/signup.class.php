@@ -7,8 +7,7 @@
         private $password;
         private $password_repeat;
 
-        public function __construct($fullname, $email, $password, $password_repeat)
-        {
+        public function __construct($fullname, $email, $password, $password_repeat){
             $this->fullname = $fullname;
             $this->email = $email;
             $this->password = $password;
@@ -45,7 +44,17 @@
                     $errors[] = "Passwords must match";
                 }
                 return $errors;
-        }
+            }
+
+            function createUser($fullname, $email, $password, $password_repeat){
+                try {
+                    $pdo = require __DIR__ ."/dbcon.php";
+                    $hash = password_hash($password, PASSWORD_BCRYPT,['cost' => 12]);
+
+                    $sql1 = "INSERT INTO users (Username,Email) VALUES (? , ?);";
+                    $sql2 = "INSERT INTO login (UserID,PasswordHash) VALUES (? , ?);";
+                } catch
+            }
         
 
     }
