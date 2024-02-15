@@ -51,9 +51,19 @@
                     $pdo = require __DIR__ ."/dbcon.php";
                     $hash = password_hash($password, PASSWORD_BCRYPT,['cost' => 12]);
 
-                    $sql1 = "INSERT INTO users (Username,Email) VALUES (? , ?);";
-                    $sql2 = "INSERT INTO login (UserID,PasswordHash) VALUES (? , ?);";
-                } catch
+                    $sql = "INSERT INTO users (Username,Email,PasswordHash) VALUES (? , ?, ?);";
+                    $stmt = $pdo->prepare($sql);
+
+                    $stmt->bindParam(1,$fullname, PDO::PARAM_STR);
+                    $stmt->bindParam(2,$email, PDO::PARAM_STR);
+                    $stmt->bindParam(3,$hash, PDO::PARAM_STR);
+
+                    $stmt->execute();
+
+                    return true;
+                } catch(PDOException $e) {
+                    return "Database error ".$e->getMessage();
+                }
             }
         
 
