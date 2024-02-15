@@ -5,18 +5,18 @@
         private $fullname;
         private $email;
         private $password;
-        private $password_repeat;
+        private $errors = [];
 
-        public function __construct($fullname, $email, $password, $password_repeat){
+        public function __construct($fullname, $email, $password, $errors){
             $this->fullname = $fullname;
             $this->email = $email;
             $this->password = $password;
-            $this->password_repeat = $password_repeat;
+            $this->errors = $errors;
         }
 
             function validateName($fullname){
                 if(empty($fullname)){
-                    return "name is required!";
+                    $this->errors = "name is required!";
                 }
                 return "";
             }
@@ -26,7 +26,7 @@
                     $sanitizedEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
                     return $sanitizedEmail;
                 }else{
-                    return "Email must be valid!";
+                    $this->errors ="Email must be valid!";
                 }
             }
 
@@ -45,27 +45,5 @@
                 }
                 return $errors;
             }
-
-            function createUser($fullname, $email, $password, $password_repeat){
-                try {
-                    $pdo = require __DIR__ ."/dbcon.php";
-                    $hash = password_hash($password, PASSWORD_BCRYPT,['cost' => 12]);
-
-                    $sql = "INSERT INTO users (Username,Email,PasswordHash) VALUES (? , ?, ?);";
-                    $stmt = $pdo->prepare($sql);
-
-                    $stmt->bindParam(1,$fullname, PDO::PARAM_STR);
-                    $stmt->bindParam(2,$email, PDO::PARAM_STR);
-                    $stmt->bindParam(3,$hash, PDO::PARAM_STR);
-
-                    $stmt->execute();
-
-                    return true;
-                } catch(PDOException $e) {
-                    return "Database error ".$e->getMessage();
-                }
-            }
-        
-
     }
 ?>
