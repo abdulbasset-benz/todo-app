@@ -7,7 +7,7 @@ $dbname = "todo";
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
     // Connexion réussie
-    echo "Connexion à la base de données Todo réussie ya kho !";
+    echo "con";
   } catch (PDOException $e) {
     // Erreur de connexion
     echo "Échec de la connexion : " . $e->getMessage();
