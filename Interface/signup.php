@@ -1,3 +1,31 @@
+<?php
+    require_once('../Logic/signup.class.php');
+    require_once('../Logic/database.class.php');
+
+    if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])){
+
+        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $password_repeat = $_POST['password_repeat'];
+
+        $signUp = new userRegister();
+
+        $result = $signUp->registerUser($fullname, $email, $password, $password_repeat);
+
+        if(is_array($result)){
+            $errors = $result;
+        }elseif(is_string($result)){
+            $errors [] = $result; 
+        }else{
+            header("location : index.php");
+            exit();
+        }
+    }
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,11 +57,11 @@
     </div>
 
     <?php if (!empty($errors)): ?>
-                        <ul class="errors">
-                            <?php foreach ($errors as $error): ?>
-                                <li><?php echo $error; ?></li>
-                            <?php endforeach; ?>
-                        </ul>
-            <?php endif; ?>
+        <ul class="errors">
+            <?php foreach ($errors as $error): ?>
+                <li><?php echo $error; ?></li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 </body>
 </html>
