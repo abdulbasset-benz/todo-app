@@ -28,5 +28,17 @@
 
             $stmt-> bindParam(':fullname', $fullname);
             $stmt-> bindParam(':email', $email);
+
+            if($stmt->execute()){
+                $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if($user !== false){
+                    return "User exists already";
+                }else{
+                    return null;
+                }
+            }else{
+                "error executing the query";
+            }
         }
     }
