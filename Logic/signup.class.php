@@ -49,7 +49,7 @@
         }
 
         public function userExists ($fullname, $email){
-            $stmt= $this->db->connect()->prepare("SELECT * FROM users WHERE fullname = :fullname || email = :email");
+            $stmt= $this->db->connect()->prepare("SELECT * FROM users WHERE Username = :fullname OR email = :email");
 
             $stmt-> bindParam(':fullname', $fullname);
             $stmt-> bindParam(':email', $email);

@@ -56,10 +56,4 @@ class User {
     }
 }
 
-// Example usage:
-$user = new User("", "johnexample", "123password", "123password");
-$user->validate();
-$errors = $user->getErrors();
-print_r($errors);
-
 ?>
