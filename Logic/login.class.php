@@ -12,31 +12,32 @@ class loginUser extends dbh
     }
 
     public function login($fullname, $email, $password)
-    {
-        try {
-            $stmt = $this->db->connect()->prepare("SELECT UserID, Username, Email, PasswordHash FROM users WHERE Username = :fullname OR Email = :email"); // Assuming your table is called 'users'
+{
+    try {
+        $stmt = $this->db->connect()->prepare("SELECT UserID, Username, Email, PasswordHash FROM users WHERE Username = :fullname OR Email = :email"); 
+        $stmt->bindParam(':fullname', $fullname);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
 
-            $stmt->bindParam(':fullname', $fullname);
-            $stmt->bindParam(':email', $email);
-            $stmt->execute();
+        if ($stmt->rowCount() > 0) {
+            $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (password_verify($password, $userRow['PasswordHash'])) {
 
-            if ($stmt->rowCount() > 0) {
-                $userRow = $stmt->fetch(PDO::FETCH_ASSOC);
-
+                session_start();
+                $_SESSION['userID'] = $userRow['UserID'];
+                $_SESSION['username'] = $userRow['Username'];
                 
-                if (password_verify($password, $userRow['PasswordHash'])) {
-                    
-                    header("location : index.php");
-                } else {
-                    
-                    return false;
-                }
+                header("location : index.php"); 
+                exit; 
             } else {
-                return false;
+                return ['error' => 'Invalid username/email or password'];
             }
-        } catch (PDOException $e) {
-            
-            return ['error' => 'Database error: ' . $e->getMessage()];  
+        } else {
+            return ['error' => 'Invalid username/email or password']; 
         }
+    } catch (PDOException $e) {
+        return ['error' => 'Database error: ' . $e->getMessage()];  
     }
+}
+
 }
